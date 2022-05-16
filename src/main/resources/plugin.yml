@@ -1,0 +1,6 @@
+name: Randomitems-1.17.1
+version: '${project.version}'
+main: com.keys.randomitems.Main
+api-version: 1.17
+authors: [ Keys ]
+description: Dream's Random block drops and are multiplied
