@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -72,10 +73,10 @@ public final class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onDeath(EntityDeathEvent e) {
         if(getConfig().get(e.getEntity().getType().toString()) != null && (e.getEntity().getType() != EntityType.AREA_EFFECT_CLOUD || e.getEntity().getType() != EntityType.ARROW || e.getEntity().getType() != EntityType.DRAGON_FIREBALL || e.getEntity().getType() != EntityType.DROPPED_ITEM || e.getEntity().getType() != EntityType.EGG || e.getEntity().getType() != EntityType.ENDER_CRYSTAL || e.getEntity().getType() != EntityType.ENDER_PEARL || e.getEntity().getType() != EntityType.ENDER_SIGNAL || e.getEntity().getType() != EntityType.FALLING_BLOCK)) {
-            e.getDrops().clear();
             e.getEntity().getLocation().getWorld().dropItemNaturally(e.getEntity().getLocation(), new ItemStack(Material.matchMaterial(getConfig().get(e.getEntity().getType().toString()).toString()), ran.nextInt(500)+1));
         }
     }
 
-
+    @EventHandler
+    public void onEntityDrop(EntityDropItemEvent e) { e.setCancelled(true); }
 }
